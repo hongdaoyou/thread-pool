@@ -1,0 +1,20 @@
+thread_pool.c: In function ‘destory_pool’:
+thread_pool.c:101:22: warning: passing argument 1 of ‘pthread_join’ makes integer from pointer without a cast [-Wint-conversion]
+  101 |         pthread_join(&pool->thId_head[i], NULL);
+      |                      ^~~~~~~~~~~~~~~~~~~
+      |                      |
+      |                      pthread_t * {aka long unsigned int *}
+In file included from thread_pool.c:2:
+/usr/include/pthread.h:215:36: note: expected ‘pthread_t’ {aka ‘long unsigned int’} but argument is of type ‘pthread_t *’ {aka ‘long unsigned int *’}
+  215 | extern int pthread_join (pthread_t __th, void **__thread_return);
+      |                          ~~~~~~~~~~^~~~
+thread_pool.c:105:31: warning: passing argument 1 of ‘pthread_mutexattr_destroy’ from incompatible pointer type [-Wincompatible-pointer-types]
+  105 |     pthread_mutexattr_destroy(&pool->mutex);
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               pthread_mutex_t * {aka union <anonymous> *}
+In file included from thread_pool.c:2:
+/usr/include/pthread.h:793:60: note: expected ‘pthread_mutexattr_t *’ {aka ‘union <anonymous> *’} but argument is of type ‘pthread_mutex_t *’ {aka ‘union <anonymous> *’}
+  793 | extern int pthread_mutexattr_destroy (pthread_mutexattr_t *__attr)
+      |                                       ~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/usr/bin/run-c：行 3: 494064 段错误               （核心已转储） ./a.out
